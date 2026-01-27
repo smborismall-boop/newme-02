@@ -83,6 +83,7 @@ const AppContent = () => {
           <Route path="analytics" element={<Analytics />} />
           <Route path="settings" element={<Settings />} />
           <Route path="admin-users" element={<AdminUsers />} />
+          <Route path="website-content" element={<WebsiteContent />} />
         </Route>
         
         {/* If maintenance mode is ON, show maintenance page for all public routes */}
