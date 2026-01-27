@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme CSS Variables */
+:root {
+    --color-primary: #FFD700;
+    --color-secondary: #1a1a1a;
+    --color-accent: #2a2a2a;
+    --color-background: #1a1a1a;
+    --color-text: #ffffff;
+}
+
 body {
     margin: 0;
     font-family:
@@ -10,6 +19,8 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-background);
+    color: var(--color-text);
 }
 
 code {

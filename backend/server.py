@@ -1,73 +1,94 @@
 from fastapi import FastAPI, APIRouter
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
-import uuid
-from datetime import datetime, timezone
-
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# Initialize database
+from database import init_db
+db = init_db()
+
+# Import routes AFTER database initialization
+from routes.registrations import router as registrations_router
+from routes.contacts import router as contacts_router
+from routes.institutions import router as institutions_router
+from routes.admin import router as admin_router
+from routes.payments import router as payments_router
+from routes.settings import router as settings_router
+from routes.analytics import router as analytics_router
+from routes.users import router as users_router
+from routes.products import router as products_router
+from routes.questions import router as questions_router
+from routes.banners import router as banners_router
+from routes.transactions import router as transactions_router
+from routes.certificates import router as certificates_router
+from routes.auth import router as auth_router
+from routes.user_payments import router as user_payments_router
+from routes.referrals import router as referrals_router
+from routes.articles import router as articles_router
+from routes.running_info import router as running_info_router
+from routes.personality_tests import router as personality_tests_router
+from routes.test_access import router as test_access_router
+from routes.ai_analysis import router as ai_analysis_router
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(
+    title="NEWME CLASS API",
+    description="API for NEWME CLASS - Kelas Peduli Talenta",
+    version="1.0.0"
+)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
-
-# Define Models
-class StatusCheck(BaseModel):
-    model_config = ConfigDict(extra="ignore")  # Ignore MongoDB's _id field
-    
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-# Add your routes to the router instead of directly to app
+# Health check endpoint
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {
+        "message": "NEWME CLASS API is running",
+        "version": "1.0.0",
+        "status": "healthy"
+    }
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.model_dump()
-    status_obj = StatusCheck(**status_dict)
-    
-    # Convert to dict and serialize datetime to ISO string for MongoDB
-    doc = status_obj.model_dump()
-    doc['timestamp'] = doc['timestamp'].isoformat()
-    
-    _ = await db.status_checks.insert_one(doc)
-    return status_obj
+@api_router.get("/health")
+async def health_check():
+    return {"status": "ok", "database": "connected"}
 
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
-    status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
-    
-    # Convert ISO string timestamps back to datetime objects
-    for check in status_checks:
-        if isinstance(check['timestamp'], str):
-            check['timestamp'] = datetime.fromisoformat(check['timestamp'])
-    
-    return status_checks
+# Include all routers
+app.include_router(registrations_router)
+app.include_router(contacts_router)
+app.include_router(institutions_router)
+app.include_router(admin_router)
+app.include_router(payments_router)
+app.include_router(settings_router)
+app.include_router(analytics_router)
+app.include_router(users_router)
+app.include_router(products_router)
+app.include_router(questions_router)
+app.include_router(banners_router)
+app.include_router(transactions_router)
+app.include_router(certificates_router)
+app.include_router(auth_router)
+app.include_router(user_payments_router)
+app.include_router(referrals_router)
+app.include_router(articles_router)
+app.include_router(running_info_router)
+app.include_router(personality_tests_router)
+app.include_router(test_access_router)
+app.include_router(ai_analysis_router)
 
-# Include the router in the main app
+# Include the base api router
 app.include_router(api_router)
+
+# Mount static files for uploads (served from frontend's public folder)
+uploads_path = Path("/app/frontend/public/uploads")
+if uploads_path.exists():
+    app.mount("/uploads", StaticFiles(directory=str(uploads_path)), name="uploads")
 
 app.add_middleware(
     CORSMiddleware,
@@ -84,6 +105,4 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+# Database connection is managed by database.py
