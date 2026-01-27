@@ -136,10 +136,13 @@ const NewmeTest = () => {
           <div className="w-24 h-24 mx-auto bg-[#1a1a1a] rounded-full flex items-center justify-center mb-6 shadow-2xl">
             <ClipboardList className="w-12 h-12 text-yellow-400" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-[#1a1a1a] mb-6">
-            NEWME_TEST
+          <span className="inline-block px-6 py-2 bg-[#1a1a1a] text-yellow-400 text-sm font-bold rounded-full mb-4">
+            GRATIS
+          </span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#1a1a1a] mb-6">
+            5 Test Dasar Gratis
           </h1>
-          <p className="text-xl text-[#2a2a2a] max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-[#2a2a2a] max-w-3xl mx-auto">
             Observasi Mandiri untuk Mengenal Potensi dan Bakat Alami Anda
           </p>
         </div>
