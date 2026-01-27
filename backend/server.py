@@ -35,6 +35,7 @@ from routes.running_info import router as running_info_router
 from routes.personality_tests import router as personality_tests_router
 from routes.test_access import router as test_access_router
 from routes.ai_analysis import router as ai_analysis_router
+from routes.website_content import router as website_content_router
 
 # Create the main app without a prefix
 app = FastAPI(
