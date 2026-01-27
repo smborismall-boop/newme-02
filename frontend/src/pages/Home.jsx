@@ -252,48 +252,6 @@ const Home = () => {
         </section>
       )}
 
-      {/* Free Test Promo Section */}
-      <section className="py-12 sm:py-16 bg-gradient-to-r from-[#D4A017]/10 to-[#D4A017]/5" data-testid="promo-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#2a2a2a] rounded-2xl p-6 sm:p-8 md:p-12 border border-[#D4A017]/30">
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
-              <div>
-                <span className="inline-block px-3 sm:px-4 py-1 bg-[#D4A017] text-black text-xs sm:text-sm font-semibold rounded-full mb-4">
-                  GRATIS
-                </span>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-                  5 Test Dasar Gratis!
-                </h2>
-                <p className="text-gray-400 mb-6 text-sm sm:text-base">
-                  Daftar sekarang dan dapatkan akses ke 5 test dasar gratis untuk mengenal potensi diri Anda.
-                </p>
-                <ul className="space-y-2 mb-6">
-                  {['Test Kepribadian Dasar', 'Test Minat Dasar', 'Test Bakat Dasar', 'Hasil Instant', 'Rekomendasi Pengembangan'].map((item, i) => (
-                    <li key={i} className="flex items-center text-gray-300 text-sm sm:text-base">
-                      <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-2 flex-shrink-0" /> {item}
-                    </li>
-                  ))}
-                </ul>
-                {!isLoggedIn && (
-                  <Link to="/register">
-                    <Button className="bg-[#D4A017] text-black hover:bg-[#B8900F] px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg w-full sm:w-auto" data-testid="promo-cta">
-                      Daftar & Mulai Test Gratis
-                    </Button>
-                  </Link>
-                )}
-              </div>
-              <div className="hidden md:block text-center">
-                <img 
-                  src="https://images.unsplash.com/photo-1598162942982-5cb74331817c?w=600&q=80"
-                  alt="Growth Mindset"
-                  className="w-full max-w-md mx-auto rounded-2xl shadow-xl border border-[#D4A017]/20"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Articles Section */}
       {articles.length > 0 && (
         <section className="py-12 sm:py-20 bg-[#2a2a2a]" data-testid="articles-section">
