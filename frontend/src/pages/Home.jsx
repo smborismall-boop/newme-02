@@ -99,6 +99,76 @@ const Home = () => {
       {/* Hero Carousel */}
       <HeroCarousel />
 
+      {/* FREE TEST PROMO - TOPIK UTAMA */}
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-[#D4A017] via-[#C49515] to-[#B8900F]" data-testid="promo-section-main">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-center md:text-left">
+              <span className="inline-block px-4 sm:px-6 py-2 bg-[#1a1a1a] text-[#D4A017] text-sm sm:text-base font-bold rounded-full mb-4 sm:mb-6 shadow-lg">
+                GRATIS
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#1a1a1a] mb-4 sm:mb-6 leading-tight">
+                5 Test Dasar<br />Gratis!
+              </h2>
+              <p className="text-[#1a1a1a]/80 mb-6 sm:mb-8 text-base sm:text-lg max-w-lg mx-auto md:mx-0">
+                Daftar sekarang dan dapatkan akses ke 5 test dasar gratis untuk mengenal potensi diri Anda.
+              </p>
+              
+              <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8 text-left max-w-md mx-auto md:mx-0">
+                {['Test Kepribadian Dasar', 'Test Minat Dasar', 'Test Bakat Dasar', 'Hasil Instant', 'Rekomendasi Pengembangan'].map((item, i) => (
+                  <li key={i} className="flex items-center text-[#1a1a1a] text-sm sm:text-base font-medium">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 mr-3 flex-shrink-0" /> 
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              
+              {!isLoggedIn && (
+                <Link to="/register">
+                  <Button 
+                    size="lg"
+                    className="bg-[#1a1a1a] text-[#D4A017] hover:bg-[#2a2a2a] px-8 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all w-full sm:w-auto" 
+                    data-testid="promo-cta-main"
+                  >
+                    Daftar & Mulai Test Gratis
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              )}
+              {isLoggedIn && (
+                <Link to="/user-test">
+                  <Button 
+                    size="lg"
+                    className="bg-[#1a1a1a] text-[#D4A017] hover:bg-[#2a2a2a] px-8 sm:px-10 py-4 sm:py-6 text-base sm:text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all w-full sm:w-auto" 
+                    data-testid="promo-cta-test"
+                  >
+                    Mulai Test Sekarang
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+              )}
+            </div>
+            
+            {/* Right Image */}
+            <div className="hidden md:block relative">
+              <div className="relative">
+                <div className="absolute -top-4 -left-4 w-full h-full bg-[#1a1a1a]/20 rounded-2xl"></div>
+                <img 
+                  src="https://images.unsplash.com/photo-1598162942982-5cb74331817c?w=600&q=80"
+                  alt="Growth Mindset"
+                  className="relative z-10 w-full max-w-md mx-auto rounded-2xl shadow-2xl border-4 border-[#1a1a1a]/20"
+                />
+                {/* Badge */}
+                <div className="absolute -bottom-4 -right-4 bg-[#1a1a1a] text-[#D4A017] px-6 py-3 rounded-full shadow-xl z-20">
+                  <p className="font-bold text-sm sm:text-base">100% GRATIS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section - Siapa Kami */}
       <AboutSection />
 
