@@ -42,6 +42,7 @@ import Articles from './pages/admin/Articles';
 import RunningInfo from './pages/admin/RunningInfo';
 import TeamManagement from './pages/admin/TeamManagement';
 import AdminUsers from './pages/admin/AdminUsers';
+import WebsiteContent from './pages/admin/WebsiteContent';
 import { Toaster } from './components/ui/toaster';
 
 // Component to handle maintenance mode check
