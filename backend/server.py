@@ -37,6 +37,7 @@ from routes.test_access import router as test_access_router
 from routes.ai_analysis import router as ai_analysis_router
 from routes.website_content import router as website_content_router
 from routes.wallet import router as wallet_router
+from routes.test_results import router as test_results_router
 
 # Create the main app without a prefix
 app = FastAPI(
@@ -85,6 +86,7 @@ app.include_router(test_access_router)
 app.include_router(ai_analysis_router)
 app.include_router(website_content_router)
 app.include_router(wallet_router)
+app.include_router(test_results_router)
 
 # Include the base api router
 app.include_router(api_router)
