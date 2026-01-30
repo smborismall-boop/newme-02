@@ -103,7 +103,7 @@ const UserTest = () => {
         title: 'Berhasil',
         description: response.data.message
       });
-      await loadAllData(user._id);
+      await loadAllData(user.id || user._id);
     } catch (error) {
       toast({
         title: 'Error',
@@ -155,7 +155,7 @@ const UserTest = () => {
       // Pay using wallet
       try {
         const payResponse = await axios.post(`${BACKEND_URL}/api/wallet/pay-test`, {
-          userId: user._id,
+          userId: user.id || user._id,
           amount: testPrice,
           description: 'Pembayaran Test Berbayar NEWMECLASS',
           paymentType: 'test_payment'
