@@ -359,7 +359,7 @@ const UserTest = () => {
                     <Trophy className="w-6 h-6 text-yellow-500" />
                   </div>
                   <div>
-                    <CardTitle className="text-white">10 Test Berbayar</CardTitle>
+                    <CardTitle className="text-white">Test Berbayar Premium</CardTitle>
                     <CardDescription className="text-yellow-400">
                       {hasPaidAccess ? 'SUDAH DIBAYAR' : formatCurrency(testPrice)}
                     </CardDescription>
