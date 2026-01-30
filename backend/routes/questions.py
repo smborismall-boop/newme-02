@@ -667,3 +667,13 @@ async def seed_questions():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+
+@router.delete("/clear-all")
+async def clear_all_questions(token_data: dict = Depends(verify_token)):
+    """Clear all questions (admin only) - for re-seeding"""
+    try:
+        result = await db.questions.delete_many({})
+        return {"message": f"Deleted {result.deleted_count} questions"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
