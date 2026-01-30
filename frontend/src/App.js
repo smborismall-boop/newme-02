@@ -102,6 +102,7 @@ const AppContent = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/user-test" element={<UserTest />} />
+            <Route path="/wallet" element={<Wallet />} />
             
             {/* Public routes with navbar/footer */}
             <Route path="/*" element={
